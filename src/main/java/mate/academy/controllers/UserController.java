@@ -1,6 +1,5 @@
 package mate.academy.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.dto.UserResponseDto;
@@ -42,16 +41,14 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserResponseDto get(@PathVariable Long id) {
-        User userById = userService.getById(id);
-        return userMapper.convertToUserDto(userById);
+        return userMapper.convertToUserDto(userService.getById(id));
     }
 
     @GetMapping
     public List<UserResponseDto> getAll() {
-        List<UserResponseDto> userDto = new ArrayList<>();
         return userService.listUsers()
                 .stream()
-                .map(user -> userMapper.convertToUserDto(user))
+                .map(userMapper::convertToUserDto)
                 .collect(Collectors.toList());
     }
 }
