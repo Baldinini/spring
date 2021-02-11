@@ -1,6 +1,7 @@
 package mate.academy.dao;
 
 import java.util.List;
+import java.util.Optional;
 import mate.academy.model.User;
 
 public interface UserDao {
@@ -8,5 +9,5 @@ public interface UserDao {
 
     List<User> listUsers();
 
-    User getById(Long id);
+    Optional<User> getById(Long id);
 }

@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-
     private final UserService userService;
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Autowired
     public UserController(UserService userService, UserMapper userMapper) {
@@ -27,15 +26,18 @@ public class UserController {
 
     @GetMapping("/inject")
     public String inject() {
-        int age = 25;
-        String name = "Mik";
-        for (int i = 0; i < 4; i++) {
-            User user = new User();
-            user.setName(name);
-            user.setAge(age++);
-            userService.add(user);
-            name = name + "ek";
-        }
+        User mike = new User();
+        mike.setName("Mike");
+        User olia = new User();
+        olia.setName("Olia");
+        User karl = new User();
+        karl.setName("Karl");
+        User kate = new User();
+        kate.setName("Kate");
+        userService.add(mike);
+        userService.add(olia);
+        userService.add(karl);
+        userService.add(kate);
         return "Successful inject";
     }
 
