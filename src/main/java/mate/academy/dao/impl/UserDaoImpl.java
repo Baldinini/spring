@@ -1,6 +1,7 @@
 package mate.academy.dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 import mate.academy.dao.UserDao;
 import mate.academy.model.User;
 import org.hibernate.Session;
@@ -45,6 +46,15 @@ public class UserDaoImpl implements UserDao {
             return session.createQuery("select u from User u", User.class).getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Error retrieving all users", e);
+        }
+    }
+
+    @Override
+    public Optional<User> getById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return Optional.ofNullable(session.get(User.class, id));
+        } catch (Exception e) {
+            throw new RuntimeException("Error get user by id: " + id, e);
         }
     }
 }
